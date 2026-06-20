@@ -1,6 +1,12 @@
+:root {
+  --accent: #d9603b;
+  --accent-dark: #b94a28;
+  --accent-soft: #f6f0e6;
+}
+
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-::selection { background: #d9603b; color: #fff; }
+::selection { background: var(--accent); color: #fff; }
 input, select, button { font-family: inherit; }
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }

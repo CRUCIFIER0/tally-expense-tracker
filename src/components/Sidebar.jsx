@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+const ACCENT_PRESETS = ['#d9603b', '#3b6ea5', '#2f9e8f', '#7c5cbf', '#b0507f', '#c0392b'];
+
 const NAV_ITEMS = [
   { key: 'dashboard', label: 'Dashboard', icon: (
     <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>
@@ -18,7 +20,7 @@ const NAV_ITEMS = [
   ) },
 ];
 
-export default function Sidebar({ view, setView, remainingStr, heroBarPct, usedPctStr, user, onSignOut }) {
+export default function Sidebar({ view, setView, remainingStr, heroBarPct, usedPctStr, user, onSignOut, accentColor, setAccentColor }) {
   const [open, setOpen] = useState(false);
   const name = user?.displayName || user?.email || 'Account';
   const initials = name.split(' ').map(p => p[0]).slice(0, 2).join('').toUpperCase();
@@ -29,7 +31,7 @@ export default function Sidebar({ view, setView, remainingStr, heroBarPct, usedP
     <aside className={`sidebar${open ? ' sidebar-open' : ''}`}>
       <div className="sidebar-top">
         <div style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '0 6px' }}>
-          <div style={{ width: 38, height: 38, borderRadius: 11, background: '#d9603b', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: "'Bricolage Grotesque'", fontWeight: 800, fontSize: 21, boxShadow: '0 3px 0 #b94a28', flex: 'none' }}>₹</div>
+          <div style={{ width: 38, height: 38, borderRadius: 11, background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: "'Bricolage Grotesque'", fontWeight: 800, fontSize: 21, boxShadow: '0 3px 0 var(--accent-dark)', flex: 'none' }}>₹</div>
           <div className="sidebar-brand-text">
             <div style={{ fontFamily: "'Bricolage Grotesque'", fontWeight: 800, fontSize: 20, letterSpacing: '-.02em', lineHeight: 1 }}>Tally</div>
             <div style={{ fontSize: 11, color: '#9b9081', fontWeight: 500, marginTop: 2 }}>Personal finance</div>
@@ -76,10 +78,42 @@ export default function Sidebar({ view, setView, remainingStr, heroBarPct, usedP
           <div style={{ fontSize: 12, color: '#9b9081', fontWeight: 600 }}>Left to spend</div>
           <div style={{ fontFamily: "'Bricolage Grotesque'", fontWeight: 800, fontSize: 23, margin: '3px 0 10px', letterSpacing: '-.02em' }}>{remainingStr}</div>
           <div style={{ height: 7, borderRadius: 99, background: '#efe7d8', overflow: 'hidden' }}>
-            <div style={{ height: '100%', borderRadius: 99, width: `${heroBarPct}%`, background: '#d9603b' }} />
+            <div style={{ height: '100%', borderRadius: 99, width: `${heroBarPct}%`, background: 'var(--accent)' }} />
           </div>
           <div style={{ fontSize: 11, color: '#9b9081', marginTop: 8, fontWeight: 500 }}>{usedPctStr} of budget used</div>
         </div>
+
+        <div style={{ padding: '0 6px' }}>
+          <div style={{ fontSize: 11, color: '#9b9081', fontWeight: 600, marginBottom: 8 }}>Accent color</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+            {ACCENT_PRESETS.map(hex => (
+              <button
+                key={hex}
+                onClick={() => setAccentColor(hex)}
+                aria-label={`Set accent color ${hex}`}
+                style={{
+                  width: 22, height: 22, borderRadius: '50%', background: hex, cursor: 'pointer', padding: 0,
+                  border: accentColor?.toLowerCase() === hex ? '2px solid #221c17' : '2px solid transparent',
+                  boxShadow: '0 0 0 1px rgba(0,0,0,.08)',
+                }}
+              />
+            ))}
+            <label
+              title="Custom color"
+              style={{
+                width: 22, height: 22, borderRadius: '50%', cursor: 'pointer', position: 'relative', overflow: 'hidden',
+                border: '1.5px dashed #9b9081', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}
+            >
+              <input
+                type="color" value={accentColor || '#d9603b'} onChange={e => setAccentColor(e.target.value)}
+                style={{ position: 'absolute', inset: -4, opacity: 0, cursor: 'pointer' }}
+              />
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#9b9081" strokeWidth="2.5" strokeLinecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </label>
+          </div>
+        </div>
+
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '2px 6px', flex: 'none' }}>
           {user?.photoURL ? (
             <img src={user.photoURL} alt="" style={{ width: 34, height: 34, borderRadius: '50%', flex: 'none', objectFit: 'cover' }} />
@@ -88,7 +122,7 @@ export default function Sidebar({ view, setView, remainingStr, heroBarPct, usedP
           )}
           <div style={{ lineHeight: 1.25, minWidth: 0 }}>
             <div style={{ fontSize: 13, fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 160 }}>{name}</div>
-            <div onClick={onSignOut} style={{ fontSize: 11, color: '#d9603b', fontWeight: 600, cursor: 'pointer' }}>Sign out</div>
+            <div onClick={onSignOut} style={{ fontSize: 11, color: 'var(--accent)', fontWeight: 600, cursor: 'pointer' }}>Sign out</div>
           </div>
         </div>
       </div>

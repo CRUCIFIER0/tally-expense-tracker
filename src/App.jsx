@@ -40,7 +40,7 @@ function AppShell({ user, signOut }) {
     <div className="app-shell" style={{ fontFamily: "'DM Sans', system-ui, sans-serif", background: '#f4efe6', color: '#221c17', WebkitFontSmoothing: 'antialiased' }}>
       <Sidebar
         view={t.view} setView={t.setView} remainingStr={d.remainingStr} heroBarPct={d.heroBarPct} usedPctStr={d.usedPctStr}
-        user={user} onSignOut={signOut}
+        user={user} onSignOut={signOut} accentColor={t.accentColor} setAccentColor={t.setAccentColor}
       />
 
       <main className="main-content">

@@ -7,7 +7,7 @@ export default function Dashboard({ d, monthLabel, monthShort, setView, openEdit
   return (
     <div className="page-in">
       <div className="grid-hero">
-        <div style={{ background: '#d9603b', color: '#fff', borderRadius: 20, padding: '22px 24px', boxShadow: '0 4px 0 #b94a28', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--accent)', color: '#fff', borderRadius: 20, padding: '22px 24px', boxShadow: '0 4px 0 var(--accent-dark)', position: 'relative', overflow: 'hidden' }}>
           <div style={{ fontSize: 13, fontWeight: 600, opacity: .85 }}>Spent in {monthLabel}</div>
           <div style={{ fontFamily: "'Bricolage Grotesque'", fontWeight: 800, fontSize: 42, letterSpacing: '-.03em', margin: '6px 0 16px', lineHeight: 1 }}>{d.totalStr}</div>
           <div style={{ height: 8, borderRadius: 99, background: 'rgba(255,255,255,.28)', overflow: 'hidden', marginBottom: 9 }}>
@@ -21,7 +21,7 @@ export default function Dashboard({ d, monthLabel, monthShort, setView, openEdit
             <svg width="74" height="74" viewBox="0 0 74 74">
               <circle cx="37" cy="37" r="27" fill="none" stroke="#efe7d8" strokeWidth="9" />
               <g transform="rotate(-90 37 37)">
-                <circle cx="37" cy="37" r="27" fill="none" stroke="#d9603b" strokeWidth="9" strokeLinecap="round" strokeDasharray={d.ringDash} />
+                <circle cx="37" cy="37" r="27" fill="none" stroke="var(--accent)" strokeWidth="9" strokeLinecap="round" strokeDasharray={d.ringDash} />
               </g>
             </svg>
             <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Bricolage Grotesque'", fontWeight: 800, fontSize: 15 }}>{d.usedPctStr}</div>
@@ -36,7 +36,7 @@ export default function Dashboard({ d, monthLabel, monthShort, setView, openEdit
         <div style={cardStyle}>
           <div style={{ fontSize: 13, color: '#9b9081', fontWeight: 600 }}>Avg per day</div>
           <div style={{ fontFamily: "'Bricolage Grotesque'", fontWeight: 800, fontSize: 27, letterSpacing: '-.02em', margin: '3px 0 12px' }}>{d.dailyAvgStr}</div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#f6f0e6', borderRadius: 9, padding: '7px 11px', fontSize: 12, fontWeight: 600, color: d.projectedColor }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'var(--accent-soft)', borderRadius: 9, padding: '7px 11px', fontSize: 12, fontWeight: 600, color: d.projectedColor }}>
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'currentColor' }} />Projected {d.projectedStr}
           </div>
         </div>
@@ -90,7 +90,7 @@ export default function Dashboard({ d, monthLabel, monthShort, setView, openEdit
         <div style={cardStyle}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 18 }}>
             <h3 style={{ fontFamily: "'Bricolage Grotesque'", fontWeight: 800, fontSize: 18, margin: 0, letterSpacing: '-.01em' }}>Budgets</h3>
-            <span onClick={() => setView('budgets')} style={{ fontSize: 12, color: '#d9603b', fontWeight: 700, cursor: 'pointer' }}>Manage →</span>
+            <span onClick={() => setView('budgets')} style={{ fontSize: 12, color: 'var(--accent)', fontWeight: 700, cursor: 'pointer' }}>Manage →</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 15 }}>
             {d.budgetRows.map((row, i) => (
@@ -110,7 +110,7 @@ export default function Dashboard({ d, monthLabel, monthShort, setView, openEdit
         <div style={cardStyle}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 12 }}>
             <h3 style={{ fontFamily: "'Bricolage Grotesque'", fontWeight: 800, fontSize: 18, margin: 0, letterSpacing: '-.01em' }}>Subscriptions</h3>
-            <span onClick={() => setView('subscriptions')} style={{ fontSize: 12, color: '#d9603b', fontWeight: 700, cursor: 'pointer' }}>{d.subMonthlyStr}/mo →</span>
+            <span onClick={() => setView('subscriptions')} style={{ fontSize: 12, color: 'var(--accent)', fontWeight: 700, cursor: 'pointer' }}>{d.subMonthlyStr}/mo →</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {d.subsList.map(s => (
@@ -123,7 +123,7 @@ export default function Dashboard({ d, monthLabel, monthShort, setView, openEdit
       <div style={cardStyle}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
           <h3 style={{ fontFamily: "'Bricolage Grotesque'", fontWeight: 800, fontSize: 18, margin: 0, letterSpacing: '-.01em' }}>Recent transactions</h3>
-          <span onClick={() => setView('transactions')} style={{ fontSize: 13, color: '#d9603b', fontWeight: 700, cursor: 'pointer' }}>See all →</span>
+          <span onClick={() => setView('transactions')} style={{ fontSize: 13, color: 'var(--accent)', fontWeight: 700, cursor: 'pointer' }}>See all →</span>
         </div>
         <div>
           {d.recentList.map(t => (

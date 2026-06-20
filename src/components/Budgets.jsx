@@ -4,7 +4,7 @@ export default function Budgets({ d, setBudget }) {
   return (
     <div className="page-in">
       <div style={{
-        background: '#d9603b', color: '#fff', borderRadius: 20, padding: '24px 26px', boxShadow: '0 4px 0 #b94a28',
+        background: 'var(--accent)', color: '#fff', borderRadius: 20, padding: '24px 26px', boxShadow: '0 4px 0 var(--accent-dark)',
         marginBottom: 18, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 24, flexWrap: 'wrap',
       }}>
         <div>

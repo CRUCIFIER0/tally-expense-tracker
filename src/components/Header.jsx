@@ -12,7 +12,7 @@ export default function Header({ greeting, title, monthLabel, primaryLabel, onPr
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 9, background: '#fffdf9', border: '1.5px solid #ece2d2', borderRadius: 11, padding: '9px 14px', fontWeight: 600, fontSize: 14 }}>
-          <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#d9603b' }} />{monthLabel}
+          <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent)' }} />{monthLabel}
         </div>
         <button
           onClick={onPrimary}
@@ -21,9 +21,9 @@ export default function Header({ greeting, title, monthLabel, primaryLabel, onPr
           onMouseDown={() => setActive(true)}
           onMouseUp={() => setActive(false)}
           style={{
-            display: 'flex', alignItems: 'center', gap: 7, background: '#d9603b', color: '#fff', border: 'none',
+            display: 'flex', alignItems: 'center', gap: 7, background: 'var(--accent)', color: '#fff', border: 'none',
             borderRadius: 11, padding: '11px 18px', fontWeight: 700, fontSize: 14, cursor: 'pointer',
-            boxShadow: active ? '0 1px 0 #b94a28' : '0 3px 0 #b94a28',
+            boxShadow: active ? '0 1px 0 var(--accent-dark)' : '0 3px 0 var(--accent-dark)',
             transform: active ? 'translateY(1px)' : hover ? 'translateY(-1px)' : 'none',
           }}
         >

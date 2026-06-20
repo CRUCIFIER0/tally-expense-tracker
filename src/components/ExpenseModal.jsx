@@ -72,7 +72,7 @@ export default function ExpenseModal({ open, form, setFormField, toggleRecurring
             <button onClick={onDelete} style={{ border: '1.5px solid #e8c4bb', background: '#fff', color: '#c0392b', borderRadius: 12, padding: '12px 16px', fontWeight: 700, fontSize: 14, cursor: 'pointer' }}>Delete</button>
           )}
           <button onClick={onClose} style={{ flex: 1, border: '1.5px solid #e6dccb', background: '#fff', color: '#4a423a', borderRadius: 12, padding: 12, fontWeight: 700, fontSize: 14, cursor: 'pointer' }}>Cancel</button>
-          <button onClick={onSave} style={{ flex: 1, border: 'none', background: '#d9603b', color: '#fff', borderRadius: 12, padding: 12, fontWeight: 700, fontSize: 14, cursor: 'pointer', boxShadow: '0 3px 0 #b94a28' }}>{isEdit ? 'Save changes' : 'Add expense'}</button>
+          <button onClick={onSave} style={{ flex: 1, border: 'none', background: 'var(--accent)', color: '#fff', borderRadius: 12, padding: 12, fontWeight: 700, fontSize: 14, cursor: 'pointer', boxShadow: '0 3px 0 var(--accent-dark)' }}>{isEdit ? 'Save changes' : 'Add expense'}</button>
         </div>
       </div>
     </div>

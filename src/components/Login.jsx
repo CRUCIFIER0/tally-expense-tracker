@@ -9,9 +9,9 @@ export default function Login({ onSignIn, error }) {
         padding: 36, boxShadow: '0 4px 0 #ece2d2', textAlign: 'center',
       }}>
         <div style={{
-          width: 52, height: 52, borderRadius: 14, background: '#d9603b', display: 'flex', alignItems: 'center',
+          width: 52, height: 52, borderRadius: 14, background: 'var(--accent)', display: 'flex', alignItems: 'center',
           justifyContent: 'center', color: '#fff', fontFamily: "'Bricolage Grotesque'", fontWeight: 800, fontSize: 28,
-          boxShadow: '0 3px 0 #b94a28', margin: '0 auto 18px',
+          boxShadow: '0 3px 0 var(--accent-dark)', margin: '0 auto 18px',
         }}>₹</div>
         <h1 style={{ fontFamily: "'Bricolage Grotesque'", fontWeight: 800, fontSize: 26, letterSpacing: '-.02em', margin: '0 0 6px' }}>Tally</h1>
         <div style={{ fontSize: 13, color: '#9b9081', fontWeight: 500, marginBottom: 28 }}>Personal finance, signed in just for you</div>

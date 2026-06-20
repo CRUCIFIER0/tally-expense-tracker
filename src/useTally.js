@@ -3,9 +3,12 @@ import { doc, onSnapshot, setDoc } from 'firebase/firestore';
 import { db } from './firebase';
 import { CATEGORIES, CATEGORY_MAP, defaultBudgets } from './data';
 import { fmt, shortDate, todayISO, getMonthInfo, lastNMonthKeys } from './utils';
+import { darken, lighten } from './colorUtils';
 
 const blankForm = () => ({ id: null, name: '', amount: '', category: 'food', date: todayISO(), recurring: false });
 const blankSub = () => ({ id: null, name: '', amount: '', category: 'fun', cycle: 'Monthly', next: todayISO() });
+
+export const DEFAULT_ACCENT = '#d9603b';
 
 export function useTally(uid) {
   const [view, setView] = useState('dashboard');
@@ -24,6 +27,7 @@ export function useTally(uid) {
   const [budgets, setBudgets] = useState(defaultBudgets);
   const [subs, setSubs] = useState([]);
   const [txns, setTxns] = useState([]);
+  const [accentColor, setAccentColorState] = useState(DEFAULT_ACCENT);
   const [dataLoading, setDataLoading] = useState(true);
 
   // Firestore: subscribe to this user's document and keep local state in sync.
@@ -38,13 +42,21 @@ export function useTally(uid) {
         setBudgets(data.budgets || defaultBudgets);
         setSubs(data.subs || []);
         setTxns(data.txns || []);
+        setAccentColorState(data.accentColor || DEFAULT_ACCENT);
       } else {
-        setDoc(ref, { budgets: defaultBudgets, subs: [], txns: [] });
+        setDoc(ref, { budgets: defaultBudgets, subs: [], txns: [], accentColor: DEFAULT_ACCENT });
       }
       setDataLoading(false);
     });
     return unsub;
   }, [uid]);
+
+  useEffect(() => {
+    const root = document.documentElement.style;
+    root.setProperty('--accent', accentColor);
+    root.setProperty('--accent-dark', darken(accentColor));
+    root.setProperty('--accent-soft', lighten(accentColor, 0.92));
+  }, [accentColor]);
 
   const persist = useCallback((next) => {
     if (!uid) return;
@@ -152,6 +164,11 @@ export function useTally(uid) {
     persist({ budgets: next });
     return next;
   }), [persist]);
+
+  const setAccentColor = useCallback(hex => {
+    setAccentColorState(hex);
+    persist({ accentColor: hex });
+  }, [persist]);
 
   const derived = useMemo(() => {
     const { monthKey, dayOfMonth, daysInMonth, monthLabel, monthShort } = getMonthInfo();
@@ -297,6 +314,7 @@ export function useTally(uid) {
     modalOpen, formError, form, setFormField, openAddModal, openEditModal, closeModal, toggleRecurring, saveForm, deleteCurrent, deleteTxn,
     subModalOpen, subError, subForm, setSubFormField, openAddSub, openEditSub, closeSub, setCycle, saveSub, deleteSubCurrent, deleteSub,
     budgets, setBudget,
+    accentColor, setAccentColor,
     dataLoading,
     derived,
   };
